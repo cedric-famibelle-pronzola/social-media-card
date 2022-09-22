@@ -17,6 +17,10 @@
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.5",
+    "dotenv": "^16.0.2",
+    "fork-awesome": "^1.2.0",
+    "fs-extra": "^10.1.0",
+    "got": "^11.8.5",
     "next": "12.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -34,7 +38,14 @@
     "rules": {
       "import/extensions": "off",
       "import/no-anonymous-default-export": "off",
-      "react/function-component-definition": "off"
+      "comma-dangle": [
+        "error", {
+          "arrays": "never",
+          "objects": "never"
+        }
+      ],
+      "react/function-component-definition": "off",
+       "n/prefer-global/process": "off"
     }
   }
 }
