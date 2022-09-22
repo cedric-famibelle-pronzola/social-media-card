@@ -36,3 +36,6 @@ yarn-error.log*
 next-env.d.ts
 
 .env
+social-media-card-data.json
+public/images/icons/*
+!public/images/icons/no-icon.png

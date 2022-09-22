@@ -7,7 +7,9 @@
   "author": "Cédric FAMIBELLE-PRONZOLA <cedric@livingdata.co>",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build-next": "next build",
+    "build-social-media-card-data": "node scripts/build-social-media-card-data.js",
+    "build": "yarn build-social-media-card-data && yarn build-next",
     "start": "next start",
     "lint": "xo"
   },
