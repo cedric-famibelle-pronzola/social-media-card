@@ -2,6 +2,8 @@
 
 ## Generate a card with your social media
 
+![Social Media Card](./public/images/social-media-card-capture.png)
+
 ### Required
 
 - NodeJS 16+
