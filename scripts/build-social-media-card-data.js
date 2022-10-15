@@ -12,11 +12,22 @@ const socialMediaFile = path.join(__dirname, '..', 'social-media-card-data.json'
 let countMedia = 0
 let hasData = false
 
+/**
+ * Check if an icon is available in forkawesome library.
+ *
+ * @param {string} icon
+ * @returns {boolean}
+ */
 async function checkHasIcon(icon) {
   const {statusCode} = await got(`https://forkaweso.me/Fork-Awesome/icon/${icon}/`, {throwHttpErrors: false})
   return statusCode === 200
 }
 
+/**
+ * Generate an id
+ *
+ * @returns {string}
+ */
 function createId() {
   return String(
     Date.now().toString(32)
@@ -24,6 +35,11 @@ function createId() {
   ).replace(/\./g, '')
 }
 
+/**
+ * Returns (if exist) SOCIAL_MEDIA_LIST content variable.
+ *
+ * @returns {array}
+ */
 function getSocialMediaList() {
   if (process.env.SOCIAL_MEDIA_LIST) {
     return process.env.SOCIAL_MEDIA_LIST.split(',')
@@ -32,6 +48,11 @@ function getSocialMediaList() {
   throw new Error('SOCIAL_MEDIA_LIST is required')
 }
 
+/**
+ * Reads the json file and return its content.
+ *
+ * @returns {array}
+ */
 async function getExistingSocialMedia() {
   try {
     await fs.ensureFile(socialMediaFile)
@@ -43,6 +64,13 @@ async function getExistingSocialMedia() {
   }
 }
 
+/**
+ * Filters social media and returns social media to keep and new ones to write.
+ *
+ * @param {array} socialMediaList
+ * @param {array} existingSocialMedia
+ * @returns {object}
+ */
 function filterSocialMediaToWrite(socialMediaList, existingSocialMedia) {
   if (!existingSocialMedia) {
     return socialMediaList
@@ -55,6 +83,13 @@ function filterSocialMediaToWrite(socialMediaList, existingSocialMedia) {
   return {socialMediaToKeep, socialMediaToWrite}
 }
 
+/**
+ * Writes json file.
+ *
+ * @param {array} socialMediaNames
+ * @param {array} socialMediaToKeep
+ * @returns {void}
+ */
 async function writeJson(socialMediaNames, socialMediaToKeep) {
   const jsonContent = await fs.readJson(socialMediaFile)
   const hasDataToWrite = !isEqual(jsonContent, socialMediaToKeep)
@@ -92,6 +127,11 @@ async function writeJson(socialMediaNames, socialMediaToKeep) {
   await fs.outputJson(socialMediaFile, json, {spaces: 2})
 }
 
+/**
+ * Counts items to write
+ *
+ * @param {number} nbItemsToWrite
+ */
 function countItems(nbItemsToWrite) {
   const isAllWrote = countMedia > 0 && countMedia === nbItemsToWrite
 
