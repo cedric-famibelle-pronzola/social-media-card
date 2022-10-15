@@ -6,6 +6,7 @@ const path = require('path')
 const {exit} = require('process')
 const fs = require('fs-extra')
 const got = require('got')
+const {isEqual, differenceBy} = require('lodash')
 
 const socialMediaFile = path.join(__dirname, '..', 'social-media-card-data.json')
 let countMedia = 0
@@ -42,24 +43,33 @@ async function getExistingSocialMedia() {
   }
 }
 
-function sortSocialMediaNames(socialMediaList, existingSocialMedia) {
+function filterSocialMediaToWrite(socialMediaList, existingSocialMedia) {
   if (!existingSocialMedia) {
     return socialMediaList
   }
 
-  const nameList = new Set(existingSocialMedia.map(({name}) => name))
-  const difference = socialMediaList.filter(n => !nameList.has(n))
+  const existingNameList = new Set(existingSocialMedia.map(({name}) => name))
+  const socialMediaToKeep = existingSocialMedia.filter(({name}) => socialMediaList.includes(name))
+  const socialMediaToWrite = socialMediaList.filter(n => !existingNameList.has(n))
 
-  return difference.length > 0 ? difference : null
+  return {socialMediaToKeep, socialMediaToWrite}
 }
 
-async function writeJson(socialMediaNames, existingSocialMedia) {
-  const json = existingSocialMedia || []
+async function writeJson(socialMediaNames, socialMediaToKeep) {
+  const jsonContent = await fs.readJson(socialMediaFile)
+  const hasDataToWrite = !isEqual(jsonContent, socialMediaToKeep)
+  const json = socialMediaToKeep || []
 
-  if (socialMediaNames) {
+  if (socialMediaNames.length > 0) {
     hasData = true
   } else {
-    console.log('\n\u001B[1m\u001B[42m  No data to write  \u001B[0m')
+    console.log('\n\u001B[1m\u001B[42m  No other data to add.  \u001B[0m \n')
+    if (hasDataToWrite) {
+      const dataToDelete = differenceBy(jsonContent, socialMediaToKeep, 'id')
+      console.log(`\n\u001B[1m\u001B[42m  \u001B[32m\u001B[107m ${dataToDelete.length} \u001B[97m\u001B[42m to delete.  \u001B[0m`)
+    }
+
+    await fs.outputJson(socialMediaFile, json, {spaces: 2})
     return
   }
 
@@ -82,15 +92,13 @@ async function writeJson(socialMediaNames, existingSocialMedia) {
   await fs.outputJson(socialMediaFile, json, {spaces: 2})
 }
 
-async function countItems() {
-  const json = await fs.readJson(socialMediaFile)
-  const nbItems = json.length
-  const isAllWrote = countMedia > 0 && countMedia === nbItems
+function countItems(nbItemsToWrite) {
+  const isAllWrote = countMedia > 0 && countMedia === nbItemsToWrite
 
   if (isAllWrote) {
     console.log(`\n\u001B[42m   \u001B[32m\u001B[107m ${countMedia} \u001B[97m\u001B[42m item${countMedia > 1 ? 's' : ''} was successfully wrote   \u001B[0m ✅`)
   } else {
-    const missingItem = countMedia - nbItems
+    const missingItem = nbItemsToWrite - countMedia
     console.log(`\n\u001B[1m\u001B[41m  An error occured. Missing ${missingItem} item${missingItem > 1 ? 's' : ''} \u001B[0m ❌`)
   }
 }
@@ -98,13 +106,13 @@ async function countItems() {
 async function main() {
   const existingSocialMedia = await getExistingSocialMedia()
   const socialMediaList = getSocialMediaList()
-  const socialMediaNames = sortSocialMediaNames(socialMediaList, existingSocialMedia)
+  const {socialMediaToKeep, socialMediaToWrite} = filterSocialMediaToWrite(socialMediaList, existingSocialMedia)
 
   try {
-    await writeJson(socialMediaNames, existingSocialMedia)
+    await writeJson(socialMediaToWrite, socialMediaToKeep)
 
     if (hasData) {
-      await countItems()
+      countItems(socialMediaToWrite.length)
     }
   } catch (error) {
     console.error(error)
