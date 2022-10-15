@@ -5,6 +5,7 @@
   "description": "Carte listant les réseaux sociaux",
   "repository": "https://github.com/cedric-famibelle-pronzola/social-media-card",
   "author": "Cédric FAMIBELLE-PRONZOLA <cedric@livingdata.co>",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build-next": "next build",
