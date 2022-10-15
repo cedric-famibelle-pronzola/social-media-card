@@ -136,7 +136,7 @@ function countItems(nbItemsToWrite) {
   const isAllWrote = countMedia > 0 && countMedia === nbItemsToWrite
 
   if (isAllWrote) {
-    console.log(`\n\u001B[42m   \u001B[32m\u001B[107m ${countMedia} \u001B[97m\u001B[42m item${countMedia > 1 ? 's' : ''} was successfully wrote   \u001B[0m ✅`)
+    console.log(`\n\u001B[42m   \u001B[32m\u001B[107m ${countMedia} \u001B[97m\u001B[42m item${countMedia > 1 ? 's' : ''} ${countMedia > 1 ? 'were' : 'was'} successfully wrote   \u001B[0m ✅`)
   } else {
     const missingItem = nbItemsToWrite - countMedia
     console.log(`\n\u001B[1m\u001B[41m  An error occured. Missing ${missingItem} item${missingItem > 1 ? 's' : ''} \u001B[0m ❌`)
