@@ -23,6 +23,7 @@
     "fork-awesome": "^1.2.0",
     "fs-extra": "^10.1.0",
     "got": "^11.8.5",
+    "lodash": "^4.17.21",
     "next": "12.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -41,13 +42,14 @@
       "import/extensions": "off",
       "import/no-anonymous-default-export": "off",
       "comma-dangle": [
-        "error", {
+        "error",
+        {
           "arrays": "never",
           "objects": "never"
         }
       ],
       "react/function-component-definition": "off",
-       "n/prefer-global/process": "off"
+      "n/prefer-global/process": "off"
     }
   }
 }
