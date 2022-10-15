@@ -73,7 +73,7 @@ async function getExistingSocialMedia() {
  */
 function filterSocialMediaToWrite(socialMediaList, existingSocialMedia) {
   if (!existingSocialMedia) {
-    return socialMediaList
+    return {socialMediaToWrite: socialMediaList}
   }
 
   const existingNameList = new Set(existingSocialMedia.map(({name}) => name))
@@ -91,7 +91,7 @@ function filterSocialMediaToWrite(socialMediaList, existingSocialMedia) {
  * @returns {void}
  */
 async function writeJson(socialMediaNames, socialMediaToKeep) {
-  const jsonContent = await fs.readJson(socialMediaFile)
+  const jsonContent = await getExistingSocialMedia()
   const hasDataToWrite = !isEqual(jsonContent, socialMediaToKeep)
   const json = socialMediaToKeep || []
 
