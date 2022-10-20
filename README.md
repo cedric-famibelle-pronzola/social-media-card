@@ -28,6 +28,20 @@ yarn
 ```
 yarn build-social-media-card-data
 ```
+____
+
+The background and the avatar are here ⬇️
+
+*`public/images/avatar.png` made with [Avataaars Generator](https://getavataaars.com/)*
+
+*`public/images/background.jpg` by [hubgib](https://pixabay.com/fr/users/hubgib-511643/) from [Pixabay](https://pixabay.com/images/id-490843/)* (Beach and Diamond Rock, Martinique)
+
+**You can replace theses files by yours**
+
+By default, all links redirect to the framalibre site. You have to edit the json file with your profile url. Just change `profileUrl`.
+
+The icons come from Fork Awesome. If an icon is missing in this library, the value of `customIcon` changes to `no-icon.png`. You must replace it with your icon. In this case, the file must be placed in the `public/images/icons` directory.
+____
 
 ## Dev
 
@@ -43,16 +57,18 @@ yarn build
 yarn start
 ```
 
-The background and the avatar are here ⬇️
+# 🌐 You can use the generated `out` directory (with *`yarn build`*) to deploy the app without needing a Node.js server.
 
-*`public/images/avatar.png` made with [Avataaars Generator](https://getavataaars.com/)*
+`out` directory structure (`_next` folder content is omitted) ⬇️
 
-*`public/images/background.jpg` by [hubgib](https://pixabay.com/fr/users/hubgib-511643/) from [Pixabay](https://pixabay.com/images/id-490843/)* (Beach and Diamond Rock, Martinique)
-
-**You can replace theses files by yours**
-
-___
-
-By default, all links redirect to the framalibre site. You have to edit the json file with your profile url. Just change `profileUrl`.
-
-The icons come from Fork Awesome. If an icon is missing in this library, the value of `customIcon` changes to `no-icon.png`. You must replace it with your icon. In this case, the file must be placed in the `public/images/icons` directory.
+```
+├── 404.html
+├── images
+│	├── avatar.png
+│	├── background.jpg
+│	├── icons
+│	│	└── no-icon.png
+│	└── social-media-card-capture.png
+├── index.html
+└── _next
+```
