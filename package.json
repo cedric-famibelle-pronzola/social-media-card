@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build-next": "next build",
+    "build-next": "next build && next export",
     "build-social-media-card-data": "node scripts/build-social-media-card-data.js",
     "build": "yarn build-social-media-card-data && yarn build-next",
     "start": "next start",
