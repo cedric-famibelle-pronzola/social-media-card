@@ -38,6 +38,8 @@ The background and the avatar are here ⬇️
 
 **You can replace theses files by yours**
 
+**⚠️ If you use different files, remember to change the names in the Background and Avatar components**
+
 By default, all links redirect to the framalibre site. You have to edit the json file with your profile url. Just change `profileUrl`.
 
 The icons come from Fork Awesome. If an icon is missing in this library, the value of `customIcon` changes to `no-icon.png`. You must replace it with your icon. In this case, the file must be placed in the `public/images/icons` directory.
