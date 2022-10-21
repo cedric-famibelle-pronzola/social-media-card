@@ -24,8 +24,9 @@ jobs:
     - run: yarn
     - run: yarn xo
     - run: yarn build
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        publish_dir: ./out
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: public
+        FOLDER: out
