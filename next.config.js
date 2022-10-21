@@ -2,7 +2,7 @@
 const isProd = process.env.NODE_ENV === 'production'
 
 const nextConfig = {
-  assetPrefix: isProd ? 'social-media-card' : '',
+  assetPrefix: isProd ? 'https://cedric-famibelle-pronzola.github.io/social-media-card' : '',
   reactStrictMode: true,
   swcMinify: true,
   images: {
