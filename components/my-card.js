@@ -1,5 +1,4 @@
 import Card from '@mui/material/Card'
-import CardMedia from '@mui/material/CardMedia'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
@@ -13,10 +12,10 @@ import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrow
 import data from '../social-media-card-data.json'
 
 import SocialMediaCardContent from '@/components/social-media-card-content'
+import Avatar from '@/components/avatar'
 
 const USERNAME = process.env.NEXT_PUBLIC_USERNAME
 const EMAIL = process.env.NEXT_PUBLIC_EMAIL
-const AVATAR = process.env.NEXT_PUBLIC_AVATAR_FILENAME || 'avatar.png'
 const BIOGRAPHY = process.env.NEXT_PUBLIC_BIOGRAPHY
 
 function MyCard() {
@@ -43,18 +42,15 @@ function MyCard() {
       marginBottom: isMobile ? 0 : 5
     }} maxWidth='sm'
     >
-      <Card sx={{minWidth: 150}}>
+      <Card sx={{minWidth: 150, minHeight: 820}}>
         {USERNAME && (
           <Typography sx={{mt: 2}} align='center' variant='h4'>
             {USERNAME}
           </Typography>
         )}
-        <CardMedia
-          component='img'
-          sx={{width: 150, margin: 'auto', borderRadius: 2, mt: 2}}
-          image={`/images/${AVATAR}`}
-          alt='Avatar'
-        />
+
+        <Avatar />
+
         <CardContent>
           {EMAIL && (
             <Typography gutterBottom align='center' variant='body2'>
