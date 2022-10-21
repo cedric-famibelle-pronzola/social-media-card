@@ -45,7 +45,7 @@ function getSocialMediaList() {
     return process.env.SOCIAL_MEDIA_LIST.split(',')
   }
 
-  throw new Error('SOCIAL_MEDIA_LIST is required')
+  return ['twitter', 'facebook', 'instagram', 'mastodon']
 }
 
 /**
