@@ -11,12 +11,15 @@ import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrow
 
 import data from '../social-media-card-data.json'
 
+import Footer from '@/components/footer'
 import SocialMediaCardContent from '@/components/social-media-card-content'
 import Avatar from '@/components/avatar'
 
 const USERNAME = process.env.NEXT_PUBLIC_USERNAME
 const EMAIL = process.env.NEXT_PUBLIC_EMAIL
 const BIOGRAPHY = process.env.NEXT_PUBLIC_BIOGRAPHY
+const FOOTER_URL = process.env.NEXT_PUBLIC_FOOTER_URL
+const FOOTER_TEXT = process.env.NEXT_PUBLIC_FOOTER_TEXT
 
 function MyCard() {
   const isMobile = useMediaQuery('(max-width:600px)')
@@ -39,10 +42,11 @@ function MyCard() {
       padding: 0,
       paddingTop: isMobile ? 0 : '5vh',
       width: '100%',
-      marginBottom: isMobile ? 0 : 5
+      marginBottom: isMobile ? 0 : 5,
+      position: 'relative'
     }} maxWidth='sm'
     >
-      <Card sx={{minWidth: 150, minHeight: 820}}>
+      <Card sx={{minWidth: 150, minHeight: isMobile ? 1000 : 820}}>
         {USERNAME && (
           <Typography sx={{mt: 2}} align='center' variant='h4'>
             {USERNAME}
@@ -80,6 +84,9 @@ function MyCard() {
             </List>
             <div id='page-bottom' />
           </Container>
+          {FOOTER_URL && (
+            <Footer url={FOOTER_URL} text={FOOTER_TEXT} />
+          )}
         </CardContent>
       </Card>
     </Container>

@@ -13,6 +13,7 @@ const css = {
 function Background() {
   return (
     <Image
+      placeholder='blur'
       sizes='100vw'
       width='100vw'
       style={css}

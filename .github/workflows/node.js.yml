@@ -10,7 +10,8 @@ env:
   NEXT_PUBLIC_USERNAME: Cédric
   NEXT_PUBLIC_EMAIL: c.pronzola@tuta.io
   NEXT_PUBLIC_BIOGRAPHY: Je m'appelle Cédric
-
+  NEXT_PUBLIC_FOOTER_URL: https://github.com/cedric-famibelle-pronzola/social-media-card
+  NEXT_PUBLIC_FOOTER_TEXT: Social Media Card
 jobs:
   build:
 
