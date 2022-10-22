@@ -42,7 +42,7 @@ function MyCard() {
       marginBottom: isMobile ? 0 : 5
     }} maxWidth='sm'
     >
-      <Card sx={{minWidth: 150, minHeight: 820}}>
+      <Card sx={{minWidth: 150, minHeight: isMobile ? 1000 : 820}}>
         {USERNAME && (
           <Typography sx={{mt: 2}} align='center' variant='h4'>
             {USERNAME}
